@@ -18,7 +18,7 @@ get classes:
 class Covid19Data:
     
     def __init__(self):
-        ChromeDriverPATH = "../Python Project/Bot_Telegram/etc/chromedriver.exe"
+        ChromeDriverPATH = "../PythonProjectPTIT/etc/chromedriver.exe"
         options = webdriver.ChromeOptions()
         options.add_argument('--ignore-certificate-errors')
         options.add_argument('--ignore-ssl-errors')
@@ -82,7 +82,7 @@ class Covid19Data:
             return False
 
     def getDataCovid19(self):
-        os.chdir("../Python Project/Bot_Telegram/Data")
+        os.chdir("../PythonProjectPTIT/Data")
         PATH = os.getcwd()
         try:
             self.driver.get("https://covid19.gov.vn/")

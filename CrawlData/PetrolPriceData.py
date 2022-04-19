@@ -6,7 +6,7 @@ import csv
 class PetrolPriceData:
 
     def __init__(self):
-        ChromeDriverPATH = "../Python Project/Bot_Telegram/etc/chromedriver.exe"
+        ChromeDriverPATH = "../PythonProjectPTIT/etc/chromedriver.exe"
         options = webdriver.ChromeOptions()
         options.add_argument('--ignore-certificate-errors')
         options.add_argument('--ignore-ssl-errors')
@@ -40,7 +40,7 @@ class PetrolPriceData:
 
     def saveDataInFileCSV(self):
         dataPetrolPrice = self.getPetrolPrice()
-        os.chdir("../Python Project/Bot_Telegram/Data")
+        os.chdir("../PythonProjectPTIT/Data")
         PATH = os.getcwd()
         try:
             with open(PATH + "/data_petrol_price.csv", 'w', encoding="utf-16") as f:

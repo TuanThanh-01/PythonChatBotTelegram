@@ -6,7 +6,7 @@ from selenium.webdriver.common.by import By
 class RankingPremierLeaguage:
 
     def __init__(self):
-        ChromeDriverPATH = "../Python Project/Bot_Telegram/etc/chromedriver.exe"
+        ChromeDriverPATH = "../PythonProjectPTIT/etc/chromedriver.exe"
         options = webdriver.ChromeOptions()
         options.add_argument('--ignore-certificate-errors')
         options.add_argument('--ignore-ssl-errors')
@@ -35,7 +35,7 @@ class RankingPremierLeaguage:
 
     def saveDataInFileCSV(self):
         dataRanking = self.getRankingData()
-        os.chdir("../Python Project/Bot_Telegram/Data")
+        os.chdir("../PythonProjectPTIT/Data")
         PATH = os.getcwd()
         try:
             with open(PATH + "/data_ranking_premier_leaguage.csv", 'w', encoding="utf-16") as f:
