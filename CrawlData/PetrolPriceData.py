@@ -51,6 +51,7 @@ class PetrolPriceData:
         except IOError as ex:
             print("%s" % ex)
             return False
+        
 if __name__ == "__main__":
     data = PetrolPriceData()
     data.saveDataInFileCSV()

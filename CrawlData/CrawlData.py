@@ -2,7 +2,7 @@ import Covid19Data
 import CurrencyData
 import GoldPriceData
 import PetrolPriceData
-import RankingPremierLeaguageData
+import RankingPremierLeagueData
 
 
 data = Covid19Data.Covid19Data()
@@ -17,7 +17,7 @@ data2.saveDataInFileJson()
 data3 = PetrolPriceData.PetrolPriceData()
 data3.saveDataInFileCSV()
 
-data4 = RankingPremierLeaguageData.RankingPremierLeaguage()
+data4 = RankingPremierLeagueData.RankingPremierLeaguage()
 data4.saveDataInFileCSV()
 
 
