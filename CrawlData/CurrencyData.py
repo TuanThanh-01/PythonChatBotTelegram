@@ -6,8 +6,7 @@ import time
 
 class CurrencyData:
 
-    def __init__(self):
-        ChromeDriverPATH = "../PythonProjectPTIT/etc/chromedriver.exe"
+    def __init__(self, ChromeDriverPATH):
         options = webdriver.ChromeOptions()
         options.add_argument('--ignore-certificate-errors')
         options.add_argument('--ignore-ssl-errors')
@@ -43,8 +42,8 @@ class CurrencyData:
     
     def saveCurrencyDataInJson(self):
         currencyData = self.getCurrencyData()
-        os.chdir("../PythonProjectPTIT/Data")
-        PATH = os.getcwd()
+        os.chdir("../PythonProjectPTIT")
+        PATH = os.getcwd() + "/Data"
         try:
             with open(PATH + "/data_currency.json", 'w', encoding="utf-16") as f:
                 json.dump(currencyData, f, ensure_ascii=False)     
@@ -53,6 +52,6 @@ class CurrencyData:
             return False
             
 if __name__ == "__main__":
-    data = CurrencyData()
+    data = CurrencyData("../PythonProjectPTIT/etc/chromedriver.exe")
     data.saveCurrencyDataInJson()
 

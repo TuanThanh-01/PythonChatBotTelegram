@@ -1,5 +1,6 @@
 from ast import keyword
 from pexels_api import API
+import requests as rq
 import random
 
 class Image:
@@ -24,8 +25,13 @@ class Image:
 
 
 if __name__ == "__main__":
-  data = Image()
-  lst = data.getImage("dog")
-  image = random.choice(lst)
-  print(image['url'], image['author'])
+  count = 0
+  while count < 50:
+    data = Image()
+    lst = data.getImage("dog")
+    image = random.choice(lst)
+    print(image['url'], image['author'])
+    response = rq.get(image['url'])
+    print(response.status_code)
+    count += 1
 

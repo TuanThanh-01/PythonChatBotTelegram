@@ -4,9 +4,8 @@ import os
 
 class Petrol:
 
-    def __init__(self):
-        os.chdir("../Python Project/Bot_Telegram/Data")
-        self.PATH = os.getcwd()
+    def __init__(self, PATH):
+        self.PATH = PATH
         self.timeNow = str(datetime.date.today().strftime("%d/%m/%Y"))
     
     def getTablePetrolPrice(self):

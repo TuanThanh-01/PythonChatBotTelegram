@@ -5,9 +5,8 @@ from prettytable import PrettyTable
 
 class GoldPrice:
 
-    def __init__(self):
-        os.chdir("../PythonProjectPTIT/Data")
-        self.PATH = os.getcwd()
+    def __init__(self, PATH):
+        self.PATH = PATH
 
     def readFileJson(self):
         try:
@@ -24,9 +23,10 @@ class GoldPrice:
                     lst.append(value)
                 table.add_row([lst[0], lst[1], lst[2]]) 
             
-            print(table)
+            return table
         except IOError as ex:
             print("%s" % ex)
+
 
 
 if __name__ == "__main__":

@@ -17,8 +17,7 @@ get classes:
 """
 class Covid19Data:
     
-    def __init__(self):
-        ChromeDriverPATH = "../PythonProjectPTIT/etc/chromedriver.exe"
+    def __init__(self, ChromeDriverPATH):
         options = webdriver.ChromeOptions()
         options.add_argument('--ignore-certificate-errors')
         options.add_argument('--ignore-ssl-errors')
@@ -82,8 +81,8 @@ class Covid19Data:
             return False
 
     def getDataCovid19(self):
-        os.chdir("../PythonProjectPTIT/Data")
-        PATH = os.getcwd()
+        os.chdir("../PythonProjectPTIT")
+        PATH = os.getcwd() + "/Data"
         try:
             self.driver.get("https://covid19.gov.vn/")
             time.sleep(2)
@@ -106,34 +105,9 @@ class Covid19Data:
             self.driver.close()
 
 if __name__ == "__main__":
-    data = Covid19Data()
+    data = Covid19Data("../PythonProjectPTIT/etc/chromedriver.exe")
     data.getDataCovid19()
 
-
-
-
-
-def no_accent_vietnamese(s):
-    s = re.sub('[áàảãạăắằẳẵặâấầẩẫậ]', 'a', s)
-    s = re.sub('[ÁÀẢÃẠĂẮẰẲẴẶÂẤẦẨẪẬ]', 'A', s)
-    s = re.sub('[éèẻẽẹêếềểễệ]', 'e', s)
-    s = re.sub('[ÉÈẺẼẸÊẾỀỂỄỆ]', 'E', s)
-    s = re.sub('[óòỏõọôốồổỗộơớờởỡợ]', 'o', s)
-    s = re.sub('[ÓÒỎÕỌÔỐỒỔỖỘƠỚỜỞỠỢ]', 'O', s)
-    s = re.sub('[íìỉĩị]', 'i', s)
-    s = re.sub('[ÍÌỈĨỊ]', 'I', s)
-    s = re.sub('[úùủũụưứừửữự]', 'u', s)
-    s = re.sub('[ÚÙỦŨỤƯỨỪỬỮỰ]', 'U', s)
-    s = re.sub('[ýỳỷỹỵ]', 'y', s)
-    s = re.sub('[ÝỲỶỸỴ]', 'Y', s)
-    s = re.sub('đ', 'd', s)
-    s = re.sub('Đ', 'D', s)
-    return s
-
-def getDataCity(city, listData):
-      for data in listData:
-            if no_accent_vietnamese(data['Tỉnh/TP']).lower() == no_accent_vietnamese(city.lower()):
-                  return data
 
 
 

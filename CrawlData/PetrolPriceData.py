@@ -5,8 +5,7 @@ import csv
 
 class PetrolPriceData:
 
-    def __init__(self):
-        ChromeDriverPATH = "../PythonProjectPTIT/etc/chromedriver.exe"
+    def __init__(self, ChromeDriverPATH):
         options = webdriver.ChromeOptions()
         options.add_argument('--ignore-certificate-errors')
         options.add_argument('--ignore-ssl-errors')
@@ -40,8 +39,8 @@ class PetrolPriceData:
 
     def saveDataInFileCSV(self):
         dataPetrolPrice = self.getPetrolPrice()
-        os.chdir("../PythonProjectPTIT/Data")
-        PATH = os.getcwd()
+        os.chdir("../PythonProjectPTIT")
+        PATH = os.getcwd() + "/Data"
         try:
             with open(PATH + "/data_petrol_price.csv", 'w', encoding="utf-16") as f:
                 writer = csv.writer(f)
@@ -53,5 +52,5 @@ class PetrolPriceData:
             return False
         
 if __name__ == "__main__":
-    data = PetrolPriceData()
+    data = PetrolPriceData("../PythonProjectPTIT/etc/chromedriver.exe")
     data.saveDataInFileCSV()

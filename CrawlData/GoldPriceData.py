@@ -7,8 +7,7 @@ import os
 
 class GoldPriceData:
 
-    def __init__(self):
-        ChromeDriverPATH = "../PythonProjectPTIT/etc/chromedriver.exe"
+    def __init__(self, ChromeDriverPATH):
         options = webdriver.ChromeOptions()
         options.add_argument('--ignore-certificate-errors')
         options.add_argument('--ignore-ssl-errors')
@@ -82,8 +81,8 @@ class GoldPriceData:
 
     def saveDataInFileJson(self):
         dataGoldPrice = self.getGoldPrice()
-        os.chdir("../PythonProjectPTIT/Data")
-        PATH = os.getcwd()
+        os.chdir("../PythonProjectPTIT")
+        PATH = os.getcwd() + "/Data"
         try:
             with open(PATH + "/data_gold_price.json", 'w', encoding="utf-16") as f:
                 json.dump(dataGoldPrice, f, ensure_ascii=False)
@@ -91,7 +90,7 @@ class GoldPriceData:
             print("%s" % ex)
             return False
 if __name__ == "__main__":
-    data = GoldPriceData()
+    data = GoldPriceData("../PythonProjectPTIT/etc/chromedriver.exe")
     data.saveDataInFileJson()
         
 

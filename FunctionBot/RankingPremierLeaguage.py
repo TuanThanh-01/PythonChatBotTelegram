@@ -7,9 +7,8 @@ from selenium.webdriver.common.by import By
 
 class RankingPremierLeaguage:
 
-    def __init__(self):
-        os.chdir("../PythonProjectPTIT/Data")
-        self.PATH = os.getcwd()
+    def __init__(self, PATH):
+        self.PATH = PATH
         self.timeNow = str(datetime.date.today().strftime("%d/%m/%Y"))
     
     def getTableRanking(self):

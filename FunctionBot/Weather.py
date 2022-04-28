@@ -1,3 +1,4 @@
+from operator import contains
 import requests as rq
 from googletrans import Translator
 from datetime import date
@@ -22,6 +23,19 @@ class Weather:
             weather = self.transalteText(data['weather'][0]['description'])
             temperature = round(data["main"]["temp"] - 273.15, 2)
             humidity = data["main"]["humidity"]
+            windSpeed = data["wind"]["speed"]
+
+            if "mây" in weather.lower():
+                weather = "☁ " + weather
+            elif "nắng" in weather.lower():
+                weather = "🌞 " + weather
+            elif "mưa" in weather.lower():
+                weather = "⛈ " + weather
+            elif "tuyết" in weather.lower():
+                weather = "❄ " + weather
+            else:
+                weather = "⛅ " + weather
+                
 
             if weather == "Vài mây":
                 weather = "Ít mây"
@@ -31,8 +45,9 @@ class Weather:
             resData += "Thời tiết tại: " + city
             resData += "\nThời tiết ngày: " + str(date.today().strftime("%d/%m/%Y"))
             resData += "\nThời tiết hiện tại: " + str(weather)
-            resData += "\nNhiệt Độ: " + str(int(temperature)) + "°C"
-            resData += "\nĐộ ẩm: " + str(humidity) + "%"
+            resData += "\n🌡️ Nhiệt Độ: " + str(int(temperature)) + "°C"
+            resData += "\n💦 Độ ẩm: " + str(humidity) + "%"
+            resData += "\n💨 Tốc độ gió: " + str(windSpeed) +"m/s"
         else:
             resData += "\nKhông tìm thấy thành phố!!!!"
 
@@ -40,4 +55,5 @@ class Weather:
 
 if __name__ == "__main__":
     weather = Weather()
-    print(weather.getDataWeather("Ha noi"))
+    print(weather.getDataWeather("Yakutsk"))
+

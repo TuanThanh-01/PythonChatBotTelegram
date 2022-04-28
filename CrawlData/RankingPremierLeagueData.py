@@ -5,8 +5,7 @@ from selenium.webdriver.common.by import By
 
 class RankingPremierLeaguage:
 
-    def __init__(self):
-        ChromeDriverPATH = "../PythonProjectPTIT/etc/chromedriver.exe"
+    def __init__(self, ChromeDriverPATH):
         options = webdriver.ChromeOptions()
         options.add_argument('--ignore-certificate-errors')
         options.add_argument('--ignore-ssl-errors')
@@ -35,8 +34,8 @@ class RankingPremierLeaguage:
 
     def saveDataInFileCSV(self):
         dataRanking = self.getRankingData()
-        os.chdir("../PythonProjectPTIT/Data")
-        PATH = os.getcwd()
+        os.chdir("../PythonProjectPTIT")
+        PATH = os.getcwd() + "/Data"
         try:
             with open(PATH + "/data_ranking_premier_leaguage.csv", 'w', encoding="utf-16") as f:
                 writer = csv.writer(f)
@@ -48,5 +47,5 @@ class RankingPremierLeaguage:
             return False
 
 if __name__ == "__main__":
-    data = RankingPremierLeaguage()
+    data = RankingPremierLeaguage("../PythonProjectPTIT/etc/chromedriver.exe")
     data.saveDataInFileCSV()
