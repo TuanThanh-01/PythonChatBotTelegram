@@ -9,11 +9,13 @@ from FunctionBot import Currency
 from FunctionBot import GoldPrice
 from FunctionBot import RankingPremierLeaguage
 from FunctionBot import Petrol
+from CrawlData import CrawlDataAll
 import random
 import requests as rq
+import os
 
-os.chdir("../PythonProjectPTIT/Data")
-PATHDATA = os.getcwd()
+os.chdir("../PythonProjectPTIT")
+PATHDATA = os.getcwd() + "/Data"
 
 def hello(update: Update, context: CallbackContext) -> None:
     update.message.reply_text(f'Xin chào {update.effective_user.first_name}')
@@ -21,19 +23,22 @@ def hello(update: Update, context: CallbackContext) -> None:
     
 
 def help(update: Update, context: CallbackContext) -> None:
-    helpMessage = '''/news: Các tin tức mới trong ngày.\n 
-/weather tên_thành_phố: Thời tiết tại các thành phố (ví dụ: "/weather Hà Nội").\n
-/petrol: Thông tin giá xăng dầu hôm nay.\n
-/gold: Thông tin giá vàng hôm nay.\n
-/covid: Xem tình hình covid của việt nam("/covid viet nam"), thế giới("/covid the gioi"), các tỉnh thành của việt nam("/covid ten_tinh_thanh" ví dụ /covid ha noi xem tình hình covid tại hà nội).\n
-/image: Xem ảnh (ví dụ: "/image cat" để xem ảnh mèo).\n
-/currency: Xem giá tiền tệ hôm nay.\n
+    helpMessage = '''/news: Các tin tức mới trong ngày. 
+/weather tên_thành_phố: Thời tiết tại các thành phố (ví dụ: "/weather Hà Nội").
+/petrol: Thông tin giá xăng dầu hôm nay.
+/gold: Thông tin giá vàng hôm nay.
+/covid: Xem tình hình covid của việt nam("/covid viet nam"), thế giới("/covid the gioi"), các tỉnh thành của việt nam("/covid ten_tinh_thanh" ví dụ /covid ha noi xem tình hình covid tại hà nội).
+/image: Xem ảnh (ví dụ: "/image cat" để xem ảnh mèo).
+/currency: Xem giá tiền tệ hôm nay.
 /ranking: Xem bảng xếp hạng Premier Leaguage.
 '''
     update.message.reply_text(helpMessage)
+
+
 def weather(update: Update, context: CallbackContext) -> None:
     weather = Weather.Weather()
     message_text = update.effective_message.text
+    lst = message_text.split()
     message_text = message_text.replace("/weather", "")
     city = message_text.strip()
     update.message.reply_text(weather.getDataWeather(city))
@@ -113,7 +118,11 @@ updater.dispatcher.add_handler(CommandHandler('petrol', petrol))
 updater.dispatcher.add_handler(CommandHandler('ranking', ranking))
 updater.dispatcher.add_handler(CommandHandler('covid', covid))
 
-
 updater.start_polling()
+
+crawlData = CrawlDataAll.CrawlData()
+crawlData.scheduleCrawlData()
+crawlData.run()
+
 updater.idle()
 
