@@ -14,8 +14,8 @@ import random
 import requests as rq
 import os
 
-os.chdir("../PythonProjectPTIT")
-PATHDATA = os.getcwd() + "/Data"
+# os.chdir("pythonprojectptit")
+PATHDATA = "/app/Data"
 
 def hello(update: Update, context: CallbackContext) -> None:
     update.message.reply_text(f'Xin chào {update.effective_user.first_name}')

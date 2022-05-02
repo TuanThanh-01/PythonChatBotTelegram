@@ -32,5 +32,5 @@ class Currency:
 
 
 if __name__ == "__main__":
-    test = Currency()
+    test = Currency("../pythonprojectptit/Data")
     print(test.readFileJson())

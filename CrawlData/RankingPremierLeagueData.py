@@ -5,12 +5,13 @@ from selenium.webdriver.common.by import By
 
 class RankingPremierLeaguage:
 
-    def __init__(self, ChromeDriverPATH):
-        options = webdriver.ChromeOptions()
-        options.add_argument('--ignore-certificate-errors')
-        options.add_argument('--ignore-ssl-errors')
-        options.add_experimental_option('excludeSwitches', ['enable-logging'])
-        self.driver = webdriver.Chrome(chrome_options=options, executable_path=ChromeDriverPATH)
+    def __init__(self):
+        chrome_options = webdriver.ChromeOptions()
+        chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+        chrome_options.add_argument("--headless")
+        chrome_options.add_argument("--disable-dev-shm-usage")
+        chrome_options.add_argument("--no-sandbox")
+        self.driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), options=chrome_options)
 
     def getRankingData(self):
         try:
@@ -34,8 +35,8 @@ class RankingPremierLeaguage:
 
     def saveDataInFileCSV(self):
         dataRanking = self.getRankingData()
-        os.chdir("../PythonProjectPTIT")
-        PATH = os.getcwd() + "/Data"
+        # os.chdir("pythonprojectptit")
+        PATH = "/app/Data"
         try:
             with open(PATH + "/data_ranking_premier_leaguage.csv", 'w', encoding="utf-16") as f:
                 writer = csv.writer(f)
@@ -46,6 +47,6 @@ class RankingPremierLeaguage:
             print("%s" % ex)
             return False
 
-if __name__ == "__main__":
-    data = RankingPremierLeaguage("../PythonProjectPTIT/etc/chromedriver.exe")
-    data.saveDataInFileCSV()
+# if __name__ == "__main__":
+#     data = RankingPremierLeaguage("pythonprojectptit/etc/chromedriver.exe")
+#     data.saveDataInFileCSV()

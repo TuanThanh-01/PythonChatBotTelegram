@@ -16,12 +16,14 @@ get classes:
 """
 class Covid19Data:
     
-    def __init__(self, ChromeDriverPATH):
-        options = webdriver.ChromeOptions()
-        options.add_argument('--ignore-certificate-errors')
-        options.add_argument('--ignore-ssl-errors')
-        options.add_experimental_option('excludeSwitches', ['enable-logging'])
-        self.driver = webdriver.Chrome(chrome_options=options, executable_path=ChromeDriverPATH)
+    def __init__(self):
+        chrome_options = webdriver.ChromeOptions()
+        chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+        chrome_options.add_argument("--headless")
+        chrome_options.add_argument("--disable-dev-shm-usage")
+        chrome_options.add_argument("--no-sandbox")
+        self.driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), options=chrome_options)
+        
 
     def epidemicSituationVN(self):
         # get data
@@ -80,8 +82,8 @@ class Covid19Data:
             return False
 
     def getDataCovid19(self):
-        os.chdir("../PythonProjectPTIT")
-        PATH = os.getcwd() + "/Data"
+        # os.chdir("pythonprojectptit")
+        PATH = "/app/Data"
         try:
             self.driver.get("https://covid19.gov.vn/")
             time.sleep(2)
@@ -103,9 +105,9 @@ class Covid19Data:
         finally:
             self.driver.close()
 
-if __name__ == "__main__":
-    data = Covid19Data("../PythonProjectPTIT/etc/chromedriver.exe")
-    data.getDataCovid19()
+# if __name__ == "__main__":
+#     data = Covid19Data("app/etc/chromedriver.exe")
+#     data.getDataCovid19()
 
 
 

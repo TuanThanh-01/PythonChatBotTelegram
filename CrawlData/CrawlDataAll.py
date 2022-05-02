@@ -10,42 +10,41 @@ import schedule
 class CrawlData:
 
       def __init__(self):
-            os.chdir("../PythonProjectPTIT")
-            self.CHROMEDRIVERPATH = os.getcwd() + "/etc/chromedriver.exe"
+            self.CHROMEDRIVERPATH = "/app/etc/chromedriver.exe"
 
       def crawlDataCovid(self):
-            dataCovid = Covid19Data.Covid19Data(self.CHROMEDRIVERPATH)
+            dataCovid = Covid19Data.Covid19Data()
             dataCovid.getDataCovid19()
 
       def crawlDataCurrency(self):
-            dataCurrency = CurrencyData.CurrencyData(self.CHROMEDRIVERPATH)
+            dataCurrency = CurrencyData.CurrencyData()
             dataCurrency.saveCurrencyDataInJson()
 
       def crawlDataGoldPrice(self):
-            dataGoldPrice = GoldPriceData.GoldPriceData(self.CHROMEDRIVERPATH)
+            dataGoldPrice = GoldPriceData.GoldPriceData()
             dataGoldPrice.saveDataInFileJson()
 
       def crawlDataPetrolPrice(self):
-            dataPetrolPrice = PetrolPriceData.PetrolPriceData(self.CHROMEDRIVERPATH)
+            dataPetrolPrice = PetrolPriceData.PetrolPriceData()
             dataPetrolPrice.saveDataInFileCSV()
 
       def crawlDataRankingPremierLeague(self):
-            dataRankingPremierLeague = RankingPremierLeagueData.RankingPremierLeaguage(self.CHROMEDRIVERPATH)
+            dataRankingPremierLeague = RankingPremierLeagueData.RankingPremierLeaguage()
             dataRankingPremierLeague.saveDataInFileCSV()
 
       def scheduleCrawlData(self):
-            schedule.every().day.at("19:00").do(self.crawlDataCovid)
-            schedule.every().day.at("09:00").do(self.crawlDataCurrency)
-            schedule.every().day.at("09:00").do(self.crawlDataPetrolPrice)
-            schedule.every(10).minutes.do(self.crawlDataGoldPrice)
-            schedule.every().day.at("19:00").do(self.crawlDataRankingPremierLeague)
+            schedule.every(15).minutes.do(self.crawlDataCovid)
+            schedule.every(15).minutes.do(self.crawlDataCurrency)
+            schedule.every(15).minutes.do(self.crawlDataPetrolPrice)
+            schedule.every(15).minutes.do(self.crawlDataGoldPrice)
+            schedule.every(15).minutes.do(self.crawlDataRankingPremierLeague)
 
       def run(self):
             while True:
                   schedule.run_pending()
                   time.sleep(1)
 
-if __name__ == "__main__":
-      data = CrawlData()
-      data.scheduleCrawlData()
-      data.run()
+# if __name__ == "__main__":
+#       data = CrawlData()
+#       data.scheduleCrawlData()
+#       data.run()
