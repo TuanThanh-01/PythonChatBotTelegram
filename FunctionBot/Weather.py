@@ -6,7 +6,7 @@ from datetime import date
 class Weather:
 
     def __init__(self):
-        self.API_KEY = "d7fbc4c5da58efa35cc62a78c6b2af54"
+        self.API_KEY = "add token"
         self.url = "http://api.openweathermap.org/data/2.5/weather?"
 
     def transalteText(self, text):
