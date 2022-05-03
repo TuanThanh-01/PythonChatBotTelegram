@@ -105,7 +105,7 @@ def covid(update: Update, context: CallbackContext) -> None:
         except:
             update.message.reply_text("Không tìm thấy tên thành phố!!!!")
 
-updater = Updater('5296769149:AAGf0fYNN8bNwnhtIR2hPkUNoWCcPejRq8g')
+updater = Updater('add token')
 
 updater.dispatcher.add_handler(CommandHandler('hello', hello))
 updater.dispatcher.add_handler(CommandHandler('help', help))
